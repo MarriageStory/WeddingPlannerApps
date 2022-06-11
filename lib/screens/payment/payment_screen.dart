@@ -9,7 +9,6 @@ import 'package:wedding_planner/model/paymentModel.dart';
 import 'package:wedding_planner/service/paymentService.dart';
 
 class PaymentPage extends StatefulWidget {
-
   static const routeName = '/payment';
 
   const PaymentPage({Key? key}) : super(key: key);
@@ -21,7 +20,10 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> {
   late Future<Payment> _payments;
   int id = 0;
-  int done = 0;
+  int allPayment = 0;
+  int Paymentdone = 0;
+  int totalData = 0;
+  bool cek = false;
 
   @override
   void initState() {
@@ -73,85 +75,111 @@ class _PaymentPageState extends State<PaymentPage> {
           ),
 
           //Cards
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    width: 160,
-                    height: 140,
-                    padding: EdgeInsets.all(30.0),
-                    decoration: BoxDecoration(
-                      color: Colors.pink[200],
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Payment Done',
-                          // ignore: prefer_const_constructors
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+          FutureBuilder(
+            future: _payments,
+            builder: (context, AsyncSnapshot<Payment> snapshot) {
+              var state = snapshot.connectionState;
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    var payment = snapshot.data!.data[index];
+                    allPayment++;
+                    totalData++;
+                    if (payment.keterangan == "done") {
+                      Paymentdone++;
+                    }
+                    if (totalData < snapshot.data!.data.length) {
+                      return SizedBox();
+                    } else {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                width: 160,
+                                height: 140,
+                                padding: EdgeInsets.all(30.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.pink[200],
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Payment Done',
+                                      // ignore: prefer_const_constructors
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 40.0,
+                                    ),
+                                    Text(
+                                      Paymentdone.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 40.0,
-                        ),
-                        Text(
-                          done.toString(),
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          Column(
+                            children: [
+                              Container(
+                                width: 160,
+                                height: 140,
+                                padding: EdgeInsets.all(30.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white70,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'All Payment',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey[700],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 58.0,
+                                    ),
+                                    Text(
+                                      allPayment.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    width: 160,
-                    height: 140,
-                    padding: EdgeInsets.all(30.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'All Payment',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 58.0,
-                        ),
-                        Text(
-                          id.toString(),
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                        ],
+                      );
+                    }
+                  },
+                  itemCount: snapshot.data!.data.length,
+                );
+              } else {
+                return Text('');
+              }
+            },
           ),
           SizedBox(
             height: 10.0,
@@ -182,46 +210,43 @@ class _PaymentPageState extends State<PaymentPage> {
                     ),
 
                     // List view payment
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.79,
-                      child: FutureBuilder(
-                        future: _payments,
-                        builder: (context, AsyncSnapshot<Payment> snapshot) {
-                          var state = snapshot.connectionState;
-                          if (state != ConnectionState.done) {
+                    FutureBuilder(
+                      future: _payments,
+                      builder: (context, AsyncSnapshot<Payment> snapshot) {
+                        var state = snapshot.connectionState;
+                        if (state != ConnectionState.done) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) {
+                                var payment = snapshot.data!.data[index];
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, detailPayment.url,
+                                        arguments: payment);
+                                  },
+                                  child: listItem(payment),
+                                );
+                              },
+                              itemCount: snapshot.data!.data.length,
+                            );
+                          } else if (snapshot.hasError) {
                             return Center(
-                              child: CircularProgressIndicator(),
+                              child: Text(
+                                snapshot.error.toString(),
+                              ),
                             );
                           } else {
-                            if (snapshot.hasData) {
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  var payment = snapshot.data!.data[index];
-                                  return InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, detailPayment.url,
-                                          arguments: payment);
-                                    },
-                                    child: listItem(payment),
-                                  );
-                                },
-                                itemCount: snapshot.data!.data.length,
-                              );
-                            } else if (snapshot.hasError) {
-                              return Center(
-                                child: Text(
-                                  snapshot.error.toString(),
-                                ),
-                              );
-                            } else {
-                              return Text('');
-                            }
+                            return Text('');
                           }
-                        },
-                      ),
+                        }
+                      },
                     ),
                   ],
                 ),
@@ -235,11 +260,9 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   Widget listItem(payments view) {
+    cek = true;
     String tanggal = DateFormat.yMd().format(view.tanggal);
-    id++;
-    if (view.keterangan == "done") {
-      done++;
-    }
+
     return Column(
       children: [
         CardsPayment(

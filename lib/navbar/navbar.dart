@@ -4,25 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:wedding_planner/screens/homePage/homePage.dart';
+import 'package:wedding_planner/screens/task/task_screen.dart';
 import 'package:wedding_planner/screens/payment/payment_screen.dart';
 import 'package:wedding_planner/screens/teams/teams_screen.dart';
+import 'package:wedding_planner/screens/other/other_screen.dart';
 
 class BaseScreen extends StatefulWidget {
-  const BaseScreen({Key? key}) : super(key: key);
+  int index;
+  BaseScreen({Key? key, required this.index}) : super(key: key);
 
   @override
-  State<BaseScreen> createState() => _BaseScreenState();
+  State<BaseScreen> createState() => _BaseScreenState(index);
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex;
+  _BaseScreenState(this._selectedIndex);
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static const List<Widget> _widgetOptions = <Widget>[
     homePage(),
+    TaskScreen(),
     PaymentPage(),
     TeamScreen(),
+    OtherScreen(),
   ];
 
   void _onItemTapped(int index) {

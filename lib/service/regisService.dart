@@ -7,7 +7,7 @@ import 'package:wedding_planner/screens/other/components/body.dart';
 class regisService {
   // static final String _baseUrl =
   //     'https://immense-cliffs-78720.herokuapp.com/api/';
-  static const String _baseUrl = 'http://192.168.1.5:8000/api/';
+  static const String _baseUrl = 'http://192.168.1.2:8000/api/';
 
   Future register(Map<String, dynamic> body) async {
     final response = await http.post(Uri.parse(_baseUrl + "register"),

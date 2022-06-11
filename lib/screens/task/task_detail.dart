@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wedding_planner/screens/homePage/homePage.dart';
+import 'package:wedding_planner/screens/task/task_edit_form.dart';
 import 'package:wedding_planner/model/scheduleModel.dart';
+import 'package:wedding_planner/screens/task/task_screen.dart';
+import 'package:wedding_planner/navbar/navbar.dart';
 
 class DetailTask extends StatelessWidget {
   static final url = "/detail-task";
@@ -24,7 +27,8 @@ class DetailTask extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const homePage()),
+                      MaterialPageRoute(
+                          builder: (context) => BaseScreen(index: 1)),
                     );
                   },
                   child: Icon(Icons.arrow_back)),
@@ -36,12 +40,10 @@ class DetailTask extends StatelessWidget {
               SizedBox(width: 70),
               IconButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const homePage()),
-                    );
+                    Navigator.pushNamed(context, TaskEditForm.url,
+                        arguments: schedule);
                   },
-                  icon: Icon(Icons.list))
+                  icon: Icon(Icons.edit))
             ],
           ),
         ),

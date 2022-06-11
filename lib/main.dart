@@ -11,12 +11,13 @@ import 'package:wedding_planner/screens/welcome/welcome_screen.dart';
 //task
 import 'package:wedding_planner/screens/task/task_screen.dart';
 import 'package:wedding_planner/screens/task/task_form.dart';
+import 'package:wedding_planner/screens/task/task_edit_form.dart';
 import 'package:wedding_planner/screens/task/task_detail.dart';
 //payment
 import 'package:wedding_planner/screens/homePage/homePage.dart';
 import 'package:wedding_planner/screens/payment/payment_detail.dart';
 import 'package:wedding_planner/screens/payment/payment_screen.dart';
-//teamss
+//teams
 import 'package:wedding_planner/screens/teams/teams_screen.dart';
 
 void main() {
@@ -44,8 +45,13 @@ class MyApp extends StatelessWidget {
         '/welcome-screen': (context) => WelcomeScreen(),
         '/home-page': (context) => homePage(),
         '/payment': (context) => PaymentPage(),
+        '/detail-payment': (context) => detailPayment(),
+        '/task-page': (context) => TaskScreen(),
+        '/task-form': (context) => TaskForm(),
+        '/task-edit-form': (context) => TaskEditForm(),
+        '/detail-task': (context) => DetailTask(),
         '/teams': (context) => TeamScreen(),
-        '/base-screen': (context) => BaseScreen(),
+        '/base-screen': (context) => BaseScreen(index: 0),
 
       },
       // home: BaseScreen(),

@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DateDropDown extends StatelessWidget {
-  final String labelText;
+class dateTime extends StatelessWidget {
+  // final String labelText;
   final String valueText;
   final TextStyle valueStyle;
   final VoidCallback onPressed;
   // final Widget child;
 
-  const DateDropDown({
+  const dateTime({
     Key? key,
-    required this.labelText,
+    // required this.labelText,
     required this.valueText,
     required this.valueStyle,
     required this.onPressed,
@@ -23,7 +23,11 @@ class DateDropDown extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: InputDecorator(
-        decoration: InputDecoration(labelText: labelText),
+        decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFFfcabaa), width: 2),
+          ),
+        ),
         baseStyle: valueStyle,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,12 +37,6 @@ class DateDropDown extends StatelessWidget {
               valueText,
               style: valueStyle,
             ),
-            Icon(
-              Icons.arrow_drop_down,
-              color: Theme.of(context).brightness == Brightness.light
-                  ? Colors.grey.shade700
-                  : Colors.white70,
-            )
           ],
         ),
       ),

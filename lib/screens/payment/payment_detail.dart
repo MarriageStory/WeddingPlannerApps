@@ -7,7 +7,7 @@ import 'package:wedding_planner/model/paymentModel.dart';
 import 'package:wedding_planner/service/paymentDetailService.dart';
 import 'package:wedding_planner/components/formatAngka.dart';
 import 'package:intl/intl.dart';
-
+import 'package:wedding_planner/navbar/navbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wedding_planner/screens/payment/payment_screen.dart';
 
@@ -24,6 +24,7 @@ class _detailPaymentState extends State<detailPayment> {
   int id = 0;
   int totalBayar = 0;
   int unpaid = 0;
+  int totalData = 0;
   bool cek = false;
 
   @override
@@ -57,69 +58,38 @@ class _detailPaymentState extends State<detailPayment> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                Container(
+                  height: 70,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const PaymentPage()),
+                                  builder: (context) => BaseScreen(index: 2)),
                             );
                           },
                           child: Icon(Icons.arrow_back)),
-                      SizedBox(
-                        width: 5.0,
-                      ),
+                      SizedBox(width: 50),
                       Text(
-                        'Detail Payment',
+                        "Detail Payment",
                         style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 16),
+                            fontWeight: FontWeight.w600, fontSize: 18),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Icon(Icons.menu),
+                      SizedBox(width: 50),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const PaymentPage(),
+                                ));
+                          },
+                          icon: Icon(Icons.list))
                     ],
                   ),
                 ),
-
-                // Container(
-                //   height: 70,
-                //   child: Row(
-                //     children: [
-                //       TextButton(
-                //           onPressed: () {
-                //             Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                //                   builder: (context) => const PaymentPage()),
-                //             );
-                //           },
-                //           child: Icon(Icons.arrow_back)),
-                //       SizedBox(width: 50),
-                //       Text(
-                //         "Detail Payment",
-                //         style: TextStyle(
-                //             fontWeight: FontWeight.w600, fontSize: 18),
-                //       ),
-                //       SizedBox(width: 50),
-                //       IconButton(
-                //           onPressed: () {
-                //             Navigator.push(
-                //                 context,
-                //                 MaterialPageRoute(
-                //                   builder: (context) => const PaymentPage(),
-                //                 ));
-                //           },
-                //           icon: Icon(Icons.list))
-                //     ],
-                //   ),
-                // ),
-
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
@@ -185,159 +155,155 @@ class _detailPaymentState extends State<detailPayment> {
                   ),
                 ),
                 SizedBox(height: 25),
-                // Container(
-                //   child: Row(
-                //     children: [
-                //       Row(
-                //         children: [
-                //           Container(
-                //             width: 45,
-                //             height: 45,
-                //             decoration: BoxDecoration(
-                //                 // gradient: LinearGradient(
-                //                 //   begin: Alignment.topRight,
-                //                 //   end: Alignment.bottomLeft,
-                //                 //   colors: [
-                //                 //     Color(0xFF8CDA8A).withOpacity(0.65),
-                //                 //     Color(0xFFFFFFFF),
-                //                 //   ],
-                //                 // ),
-                //                 color: Color(0xFF8CDA8A).withOpacity(0.65),
-                //                 borderRadius: BorderRadius.circular(15)),
-                //             child: Icon(
-                //               Icons.add,
-                //               color: Colors.white,
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(width: 10),
-                //       Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           Container(
-                //             child: Text(
-                //               "Already Paid",
-                //               style: TextStyle(
-                //                   fontWeight: FontWeight.w600, fontSize: 15),
-                //             ),
-                //           ),
-                //           Container(
-                //             child: Text(
-                //               formatAngka.convertToIdr(totalBayar, 2),
-                //               style: TextStyle(
-                //                   fontWeight: FontWeight.w300, fontSize: 15),
-                //             ),
-                //           )
-                //         ],
-                //       ),
-                //       SizedBox(width: 20),
-                //       Row(
-                //         children: [
-                //           Container(
-                //             width: 45,
-                //             height: 45,
-                //             decoration: BoxDecoration(
-                //                 gradient: LinearGradient(
-                //                   begin: Alignment.topRight,
-                //                   end: Alignment.bottomLeft,
-                //                   colors: [
-                //                     Color(0xFFFE6A7E).withOpacity(0.65),
-                //                     Color(0xFFFE6A7E),
-                //                   ],
-                //                 ),
-                //                 borderRadius: BorderRadius.circular(15)),
-                //             child: Icon(
-                //               Icons.navigate_next,
-                //               color: Colors.white,
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(width: 10),
-                //       Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           Container(
-                //             child: Text(
-                //               "Unpaid",
-                //               style: TextStyle(
-                //                   fontWeight: FontWeight.w600, fontSize: 15),
-                //             ),
-                //           ),
-                //           Container(
-                //             child: Text(
-                //               unpaid.toString(),
-                //               style: TextStyle(
-                //                   fontWeight: FontWeight.w300, fontSize: 15),
-                //             ),
-                //           )
-                //         ],
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 15,
-                // ),
-                // Row(
-                //   children: [
-                //     Container(
-                //       child: Text("Transactions"),
-                //     ),
-                //     SizedBox(width: 200),
-                //     Row(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       mainAxisAlignment: MainAxisAlignment.end,
-                //       children: [
-                //         TextButton(
-                //             onPressed: () {
-                //               Navigator.push(
-                //                 context,
-                //                 MaterialPageRoute(
-                //                     builder: (context) => const PaymentPage()),
-                //               );
-                //             },
-                //             child: Icon(Icons.plumbing)),
-                //       ],
-                //     ),
-                //   ],
-                // ),
                 FutureBuilder(
                   future: _payments,
                   builder: (context, AsyncSnapshot<PaymentDetail> snapshot) {
                     var state = snapshot.connectionState;
-                    if (state != ConnectionState.done) {
-                      return Center(
-                        child: CircularProgressIndicator(),
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var payment_detail = snapshot.data!.data[index];
+                          if (payment_detail.idPayment == payment.id) {
+                            totalBayar += int.parse(payment_detail.bayar);
+                            unpaid -= int.parse(payment_detail.bayar);
+                            totalData++;
+                          }
+                          if (totalData < snapshot.data!.data.length) {
+                            return SizedBox();
+                          } else {
+                            return Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 45,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                          // gradient: LinearGradient(
+                                          //   begin: Alignment.topRight,
+                                          //   end: Alignment.bottomLeft,
+                                          //   colors: [
+                                          //     Color(0xFF8CDA8A).withOpacity(0.65),
+                                          //     Color(0xFFFFFFFF),
+                                          //   ],
+                                          // ),
+                                          color: Color(0xFF8CDA8A)
+                                              .withOpacity(0.65),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        "Already Paid",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 15),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        formatAngka.convertToIdr(totalBayar, 2),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 15),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(width: 20),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 45,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topRight,
+                                            end: Alignment.bottomLeft,
+                                            colors: [
+                                              Color(0xFFFE6A7E)
+                                                  .withOpacity(0.65),
+                                              Color(0xFFFE6A7E),
+                                            ],
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: Icon(
+                                        Icons.navigate_next,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        "Unpaid",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 15),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        formatAngka.convertToIdr(unpaid, 2),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 15),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            );
+                          }
+                        },
+                        itemCount: snapshot.data!.data.length,
                       );
                     } else {
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            var payment_detail = snapshot.data!.data[index];
-                            if (payment_detail.idPayment == payment.id) {
-                              totalBayar += int.parse(payment_detail.bayar);
-                              unpaid -= int.parse(payment_detail.bayar);
-                            }
-                            return SizedBox();
-                          },
-                          itemCount: snapshot.data!.data.length,
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child: Text(
-                            snapshot.error.toString(),
-                          ),
-                        );
-                      } else {
-                        return Text('');
-                      }
+                      return Text('');
                     }
                   },
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      child: Text("Transactions"),
+                    ),
+                    SizedBox(width: 200),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const PaymentPage()),
+                              );
+                            },
+                            child: Icon(Icons.plumbing)),
+                      ],
+                    ),
+                  ],
                 ),
                 FutureBuilder(
                   future: _payments,
@@ -357,173 +323,7 @@ class _detailPaymentState extends State<detailPayment> {
                             var payment_detail = snapshot.data!.data[index];
 
                             return SizedBox(
-                              child: cek == false
-                                  ? Column(
-                                      children: [
-                                        Container(
-                                          child: Row(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    width: 45,
-                                                    height: 45,
-                                                    decoration: BoxDecoration(
-                                                        // gradient: LinearGradient(
-                                                        //   begin: Alignment.topRight,
-                                                        //   end: Alignment.bottomLeft,
-                                                        //   colors: [
-                                                        //     Color(0xFF8CDA8A).withOpacity(0.65),
-                                                        //     Color(0xFFFFFFFF),
-                                                        //   ],
-                                                        // ),
-                                                        color: Color(0xFF8CDA8A)
-                                                            .withOpacity(0.65),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15)),
-                                                    child: Icon(
-                                                      Icons.add,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(width: 10),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    child: Text(
-                                                      "Already Paid",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 15),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    child: Text(
-                                                      formatAngka.convertToIdr(
-                                                          totalBayar, 2),
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          fontSize: 15),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(width: 20),
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    width: 45,
-                                                    height: 45,
-                                                    decoration: BoxDecoration(
-                                                        gradient:
-                                                            LinearGradient(
-                                                          begin: Alignment
-                                                              .topRight,
-                                                          end: Alignment
-                                                              .bottomLeft,
-                                                          colors: [
-                                                            Color(0xFFFE6A7E)
-                                                                .withOpacity(
-                                                                    0.65),
-                                                            Color(0xFFFE6A7E),
-                                                          ],
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15)),
-                                                    child: Icon(
-                                                      Icons.navigate_next,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(width: 10),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    child: Text(
-                                                      "Unpaid",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 15),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    child: Text(
-                                                      formatAngka.convertToIdr(
-                                                          unpaid, 2),
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          fontSize: 15),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              child: Text("Transactions"),
-                                            ),
-                                            SizedBox(width: 200),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const PaymentPage()),
-                                                      );
-                                                    },
-                                                    child:
-                                                        Icon(Icons.plumbing)),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const PaymentPage()),
-                                            );
-                                            //     // Navigator.pushNamed(
-                                            //     //     context, editDetailPayment.url,
-                                            //     //     arguments: payment_detail);
-                                          },
-                                          child: payment_detail.idPayment ==
-                                                  payment.id
-                                              ? listItem(payment_detail)
-                                              : SizedBox(),
-                                        )
-                                      ],
-                                    )
-                                  : payment_detail.idPayment == payment.id
+                              child: payment_detail.idPayment == payment.id
                                       ? listItem(payment_detail)
                                       : SizedBox(),
                             );

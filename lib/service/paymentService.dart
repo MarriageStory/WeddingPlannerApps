@@ -4,8 +4,8 @@ import 'package:wedding_planner/model/paymentModel.dart';
 
 class PaymentService {
   // static const String _baseUrl = 'http://10.0.2.2:8000/api/';
-  // static const String _baseUrl = 'http://192.168.1.5:8000/api/';
-  static const String _baseUrl = 'http://192.168.1.5:8000/api/';
+  // static const String _baseUrl = 'http://192.168.1.2:8000/api/';
+  static const String _baseUrl = 'http://192.168.1.2:8000/api/';
 
   var tokenData = {
     'Content-Type': 'application/x-www-form-urlencoded',
